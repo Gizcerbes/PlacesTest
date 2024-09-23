@@ -8,7 +8,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import com.uogames.balinasoft.core.model.image.Image
 import com.uogames.balinasoft.test.R
 import com.uogames.balinasoft.test.databinding.FragmentMapBinding
@@ -17,7 +16,6 @@ import com.uogames.balinasoft.test.ui.util.BitmapUtil
 import com.uogames.balinasoft.test.ui.util.LocationService
 import com.uogames.balinasoft.test.ui.util.NavigationUtil.navigateNavHost
 import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.map.CameraUpdateReason
 import com.yandex.mapkit.map.MapObjectTapListener
 import com.yandex.runtime.image.ImageProvider
