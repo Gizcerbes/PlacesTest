@@ -41,4 +41,4 @@ jobs:
         with:
           tag_name: "${{ steps.tag.outputs.android_version }}"
           files: |
-            composeApp/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/debug/app-debug.apk
