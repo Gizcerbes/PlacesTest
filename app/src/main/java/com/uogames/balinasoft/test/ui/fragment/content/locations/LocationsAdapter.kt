@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.uogames.balinasoft.core.model.image.Image
+import com.uogames.balinasoft.test.R
 import com.uogames.balinasoft.test.databinding.CardPhotoBinding
 import com.uogames.balinasoft.test.ui.util.LocalDateTimeExchange.fromEpochMilliseconds
 import com.uogames.balinasoft.test.ui.util.LocalDateTimeExchange.toShortText
@@ -40,7 +41,9 @@ class LocationsAdapter(
                 .toShortText()
 
             Glide.with(itemView.context)
-                .load(image.url).into(bind.ivImage)
+                .load(image.url)
+                .error(R.drawable.broken_image)
+                .into(bind.ivImage)
 
             bind.mcvCard.setOnClickListener { recyclerScope.launch { _onOpen.emit(image.id) } }
             bind.mcvCard.setOnLongClickListener {

@@ -18,6 +18,7 @@ import com.uogames.balinasoft.test.ui.util.LocationService
 import com.uogames.balinasoft.test.ui.util.NavigationUtil.navigateNavHost
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.CameraUpdateReason
 import com.yandex.mapkit.map.MapObjectTapListener
 import com.yandex.runtime.image.ImageProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +48,7 @@ class MapFragment : Fragment() {
     }
 
     private val placemarkTapListener = MapObjectTapListener { obj, _ ->
-        val location = obj.userData as? Image  ?: return@MapObjectTapListener false
+        val location = obj.userData as? Image ?: return@MapObjectTapListener false
         navigateNavHost(
             R.id.photoDetailFragment,
             bundleOf(PhotoDetailFragment.IMAGE_ID to location.id)
@@ -74,14 +75,22 @@ class MapFragment : Fragment() {
             isZoomGesturesEnabled = true
             set2DMode(true)
         }
-        bind.root.mapWindow.map.move(
-            CameraPosition(
-                Point(vm.location.value.latitude, vm.location.value.longitude),
-                16f,
-                0f,
-                30f
-            )
-        )
+
+
+        val camPosition = when (val r = vm.selected.value) {
+            null -> vm.getMyPosition()
+            else -> r
+        }
+
+        bind.root.mapWindow.map.move(camPosition)
+
+        bind.root.mapWindow.map.addCameraListener { _, cameraPosition, cameraUpdateReason, _ ->
+            vm.selected.value = cameraPosition
+            when (cameraUpdateReason) {
+                CameraUpdateReason.GESTURES -> vm.defaultPosition.value = false
+                CameraUpdateReason.APPLICATION -> {}
+            }
+        }
 
     }
 

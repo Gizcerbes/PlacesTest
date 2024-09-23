@@ -15,14 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    override fun onStart() {
-        //MapKitFactory.getInstance().onStart()
-        super.onStart()
-    }
-
     override fun onStop() {
-       MapKitFactory.getInstance().onStop()
+        MapKitFactory.getInstance().onStop()
         Config.save(applicationContext)
         super.onStop()
     }

@@ -71,20 +71,26 @@ class PhotoDetailFragment : Fragment() {
         observer = lifecycleScope.launch {
             vm.image.onEach { image ->
                 if (image == null) return@onEach
-                Glide.with(requireContext()).load(image.url).into(bind.ivImage)
+                Glide.with(requireContext())
+                    .load(image.url)
+                    .error(R.drawable.broken_image)
+                    .into(bind.ivImage)
                 bind.tvDate.text = LocalDateTime.fromEpochMilliseconds(image.date * 1000).toLongText()
             }.launchIn(this)
+
             vm.busy.combine(vm.comments) { f, s ->
                 if (!f || s.size != bind.rvComments.adapter?.itemCount) {
                     bind.rvComments.stopScroll()
                     bind.rvComments.adapter?.notifyDataSetChanged()
                 }
             }.launchIn(this)
+
             vm.busy.onEach {
                 bind.srlRefresh.isRefreshing = it
                 bind.tilComment.isEnabled = !it
 
             }.launchIn(this)
+
             vm.adapter.onDelete.onEach {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(getString(R.string.delete))
@@ -93,6 +99,7 @@ class PhotoDetailFragment : Fragment() {
                     .setNegativeButton(getString(R.string.no)) { _, _ -> }
                     .show()
             }.launchIn(this)
+
             vm.errorHandler.onEach {
                 val message = when (it) {
                     is CommentSendUseCase.TextEmpty -> getString(R.string.text_is_empty)
@@ -101,6 +108,7 @@ class PhotoDetailFragment : Fragment() {
                 }
                 Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
             }.launchIn(this)
+
             vm.onClearTextField.onEach {
                 bind.tilComment.editText?.setText("")
                 val manager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
