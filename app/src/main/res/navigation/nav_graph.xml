@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/rootFragment">
+
+    <fragment
+        android:id="@+id/rootFragment"
+        android:name="com.uogames.balinasoft.test.ui.fragment.root.RootFragment"
+        android:label="RootFragment" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.uogames.balinasoft.test.ui.fragment.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/photoDetailFragment"
+        android:name="com.uogames.balinasoft.test.ui.fragment.photo_detail.PhotoDetailFragment"
+        android:label="PhotoDetailFragment"
+        tools:layout="@layout/fragment_photo_detail" />
+
+
+    <fragment
+        android:id="@+id/authFragment"
+        tools:layout="@layout/fragment_auth"
+        android:name="com.uogames.balinasoft.test.ui.fragment.auth.AuthFragment"
+        android:label="AuthFragment" />
+
+
+
+
+</navigation>

@@ -1,0 +1,38 @@
+name: Build Action
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Clean build
+        run: ./gradlew clean
+
+      - name: Build bundle apk
+        run: ./gradlew composeApp:assembleDebug
+
+      - name: Get Version
+        id: tag
+        run: |
+          echo "android_version=v$(${{github.workspace}}/gradlew -q :app:version).${GITHUB_RUN_NUMBER}" >> $GITHUB_OUTPUT
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "${{ steps.tag.outputs.android_version }}"
+          files: |
+            composeApp/build/outputs/apk/debug/app-debug.apk

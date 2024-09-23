@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/mtb_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/arrow_back_24px"
+            app:navigationIconTint="?attr/colorOnPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_refresh"
+        android:layout_below="@id/abl_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    tools:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_image"
+                    android:background="@color/black_20"
+                    android:gravity="center"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    tools:text="26.01.2017 12:00" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_comments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_date"
+                    android:layout_marginBottom="70dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/card_comment" />
+
+
+            </RelativeLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_comment"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="match_parent"
+        android:enabled="false"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:boxBackgroundColor="@color/white"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxBackgroundMode="outline"
+        android:hint="@string/message"
+        app:endIconDrawable="@drawable/send_24px"
+        app:endIconMode="custom">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+</RelativeLayout>

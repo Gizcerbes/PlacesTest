@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/mtb_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/menu_24px"
+            app:navigationIconTint="?attr/colorOnPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_home_content"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/abl_app_bar"
+        app:defaultNavHost="false"
+        app:navGraph="@navigation/content_nav" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_open_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:contentDescription="@string/open_camera"
+        app:srcCompat="@drawable/add_24px"
+        app:tint="?attr/colorOnPrimary" />
+
+    <RelativeLayout
+        android:id="@+id/rl_blind"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:visibility="gone"
+        android:background="@color/black_40"
+        android:elevation="6dp" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:maxWidth="300dp"
+        android:visibility="gone"
+        app:elevation="7dp"
+        app:headerLayout="@layout/card_header"
+        app:menu="@menu/navigation_drawer" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/progress_card"
+        android:layout_width="match_parent"
+        app:contentPadding="16.dp"
+        android:visibility="visible"
+        app:cardElevation="8dp"
+        android:layout_below="@id/abl_app_bar"
+        android:layout_margin="16.dp"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Uploading"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:progress="50"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>
