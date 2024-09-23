@@ -21,8 +21,8 @@ jobs:
 
       - name: Decoded secrets
         env:
-          ENCODED_SECURE_FILE: ${{ secrets.ENCODED_SECURE_FILE }}
-        run: |
+          SECURED_FILE: ${{ secrets.ENCODED_SECURE_FILE }}
+        run:
           echo $SECURED_FILE | base64 --decode  > "${GITHUB_WORKSPACE}"/app/src/main/java/com/uogames/balinasoft/test/Secured.kt
 
       - name: Clean build
